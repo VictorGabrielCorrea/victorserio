@@ -1,50 +1,6 @@
 <?php
 require_once 'inc/lib.php';
 
-session_start();
-if (!empty($_SESSION['user'])) {
-
-	if (!$user = user_info($_SESSION['user'])) {
-		if (ini_get('session.use_cookies')) {
-			$params = session_get_cookie_params();
-			setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-		}
-		// User does not exist, redirect to login page
-		header('Location: .');
-		exit('Not logged in!');
-	}
-
-} elseif (!empty($_POST['user']) && !empty($_POST['pass'])) {
-
-	// Get user data
-	$user = user_info($_POST['user']);
-
-	$_SESSION['is_admin'] = $user['role'] == 'admin';
-
-	// Check user exists and password is good
-	if (!$user || ($_POST['pass'] != $user['pass'])) {
-		// Login failure, redirect to login page
-		header('Location: ./?error=badlogin');
-		exit('Not logged in!');
-	}
-
-	// Current user is valid
-	$_SESSION['user'] = $user['user'];
-
-} else {
-
-	// Not logged in, redirect to login page
-	header('Location: .');
-	exit('Not logged in!');
-
-}
-
-if(isset($_POST['key'])) { 
-	set_key($user['user'],$user['home'].'/ngrok.yml',$user['key'],$_POST['key']);
-	user_modify($user['user'],$user['pass'],$user['role'],$user['home'],$user['ram'],$user['port'],$user['jar'],$_POST['key']);
-	set_key($user['user'],$user['home'].'/ngrok.yml',$user['key'],$_POST['key']);
-	user_modify($user['user'],$user['pass'],$user['role'],$user['home'],$user['ram'],$user['port'],$user['jar'],$_POST['key']);
-}
 ?><!doctype html>
 <html>
 <head>
