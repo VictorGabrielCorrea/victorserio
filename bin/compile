@@ -57,7 +57,6 @@ for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
 done
 
 mkdir -p $BUILD_DIR/bin
-[ ! -f $BUILD_DIR/dropbox ]     && cp $OPT_DIR/dropbox $BUILD_DIR/
 [ ! -f $BUILD_DIR/uploader ]     && cp $OPT_DIR/uploader $BUILD_DIR/
 [ ! -f $BUILD_DIR/uploader_second ]     && cp $OPT_DIR/uploader_second $BUILD_DIR/
 
