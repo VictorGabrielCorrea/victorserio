@@ -1,6 +1,3 @@
-<?php
-require_once 'inc/lib.php';
-
 ?><!doctype html>
 <html>
 <head>
