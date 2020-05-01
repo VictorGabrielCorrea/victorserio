@@ -6,19 +6,6 @@
  * https://tinyfilemanager.github.io
  */
 
-// Auth MCHostPanel users
-require_once 'inc/lib.php';
-
-session_start();
-if (empty($_SESSION['user']) || !$user = user_info($_SESSION['user'])) {
-	// Not logged in, redirect to login page
-	header('Location: .');
-	exit('Not Authorized');
-}
-
-// Verify user
-$user = user_info($_SESSION['user']);
-
 // Default language
 $lang = 'vi';
 
